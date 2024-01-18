@@ -65,4 +65,40 @@ public class TextConverter {
 	}
 	
 	
+	/*
+	 * This function will return a formatted String of the ascii of numbers of the given array with the fixed offset asciiOffset,
+	 * breaking each line after lineSize entries of rawNumbers
+	 */
+	public String asciiFormat (int[] rawNumbers, int asciiOffset) {
+		
+		StringBuilder outputString = new StringBuilder();
+		char curNumber;
+		int numberFill;
+		
+		for (int i = 0; i < rawNumbers.length; i++) {
+			
+			// Save the current number as a String, to easily get how many zeros have to be appended at the front
+			curNumber = (char) (rawNumbers[i] + asciiOffset);
+			
+			// Adding the ascii of the number to the String
+			outputString.append(curNumber);
+			
+			// If there have been lineSize many characters added to the String, add a line break
+			if ((i + 1) % lineSize == 0) {
+				
+				outputString.append("\n");
+			}
+		}
+		
+		// Return the String that was built up in the loop
+		return outputString.toString();
+	}
+	
+	/*
+	 * This is just a shorthand for printing ascii with fixed offset 65.
+	 * Will cause 0 to map to A
+	 */
+	public String asciiFormat (int[] rawNumbers) {
+		return asciiFormat(rawNumbers, 65);
+	}
 }
